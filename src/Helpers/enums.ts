@@ -11,4 +11,6 @@ export enum ResponseMessages {
   SUCCESS_SHUFFLE = "Shuffle done!",
   INTERNAL_SERVER_ERROR = "Oops... Something bad happens on server!",
   NO_PAIRS = "Oh... Seems like game doesn't start ¯_(ツ)_/¯",
+  NOT_ENOUGH_PEOPLE = "You can shuffle only if registered more then 2 users.",
+  NO_REGISTRATION_SLOTS = "You can't register now, wait when shuffle ends.",
 }

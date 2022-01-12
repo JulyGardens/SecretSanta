@@ -1,0 +1,35 @@
+{
+  "name": "secretsanta",
+  "version": "1.0.0",
+  "description": "Test project for Yalantis School",
+  "main": "build/index.js",
+  "scripts": {
+    "start:dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "start:prod": "node -r ./tsconfig-paths-bootstrap.js build/index.js",
+    "prisma:f": "npx prisma format",
+    "prisma:m": "npx prisma migrate",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulyGardens/SecretSanta.git"
+  },
+  "author": "secreori@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JulyGardens/SecretSanta/issues"
+  },
+  "homepage": "https://github.com/JulyGardens/SecretSanta#readme",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "prisma": "^3.8.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.8",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.4"
+  }
+}

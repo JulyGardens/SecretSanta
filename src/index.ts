@@ -3,7 +3,7 @@ import userRoute from "@Routes/user";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import logMiddleware from "@Middlewares/logMiddleware";
+import log from "@Middlewares/log";
 
 config({ path: "./.env" });
 
@@ -13,7 +13,7 @@ const server = express();
 // MIDDLEWARE
 server.use(cors());
 server.use(express.json());
-server.use(logMiddleware);
+server.use(log);
 
 // ROUTES
 server.use("/api", userRoute);

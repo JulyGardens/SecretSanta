@@ -18,8 +18,9 @@ class ShuffleController {
       }
 
       return res.json({
-        pairs: allPairs,
+        count: allPairs.length,
         code: ResponseCodes.OK,
+        pairs: allPairs,
       });
     } catch (err) {
       return res.json({
@@ -48,16 +49,18 @@ class ShuffleController {
 
           return res.json({
             message: ResponseMessages.SUCCESS_SHUFFLE,
-            pairs: createdPairs,
             code: ResponseCodes.OK,
+            count: createdPairs.length,
+            pairs: createdPairs,
           });
         }
 
-        withoutSanta.delete(user);
-        const randomUser = utils.randomElement([...withoutSanta]);
+        const randomUser = utils.randomElement(
+          [...withoutSanta].filter(u => u.id != user.id)
+        );
+
         await ShuffleService.createPair(user.id, randomUser.id);
 
-        withoutSanta.add(user);
         withoutSanta.delete(randomUser);
       }
 
@@ -65,12 +68,30 @@ class ShuffleController {
 
       return res.json({
         message: ResponseMessages.SUCCESS_SHUFFLE,
-        pairs: createdPairs,
+        count: createdPairs.length,
         code: ResponseCodes.OK,
+        pairs: createdPairs,
       });
     } catch (err) {
       return res.json({
         error: err,
+        message: ResponseMessages.INTERNAL_SERVER_ERROR,
+        code: ResponseCodes.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+
+  public async bulkDelete(req: Request, res: Response) {
+    try {
+      const count = await ShuffleService.bulkDelete();
+
+      return res.json({
+        deletedPairs: count,
+        code: ResponseCodes.OK,
+      });
+    } catch (err) {
+      return res.json({
+        customErr: err,
         message: ResponseMessages.INTERNAL_SERVER_ERROR,
         code: ResponseCodes.INTERNAL_SERVER_ERROR,
       });

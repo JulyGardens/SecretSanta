@@ -1,10 +1,12 @@
 export enum ResponseCodes {
   OK = 200,
+  BAD_REQUEST = 400,
   NOT_FOUND = 404,
   INTERNAL_SERVER_ERROR = 500,
 }
 
 export enum ResponseMessages {
+  BAD_REQUEST = "Bad request!",
   NO_INFORMATION = "No information on that route!",
   NO_DATA = "No data was found by your ID",
   SUCCESS_REGISTRATION = "You was successfuly registered!",

@@ -30,6 +30,18 @@ class ShuffleService {
       }
     });
   }
+
+  public bulkDelete() {
+    return new Promise<number>(async (resolve, reject) => {
+      try {
+        const { count } = await DatabaseClient.usersPair.deleteMany()
+
+        resolve(count)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
 }
 
 export default new ShuffleService();

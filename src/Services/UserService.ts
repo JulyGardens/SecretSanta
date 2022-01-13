@@ -3,6 +3,18 @@ import { Users } from "@prisma/client";
 import DatabaseClient from "@Structure/DatabaseClient";
 
 class UserService {
+  public bulkDelete() {
+    return new Promise<number>(async (resolve, reject) => {
+      try {
+        const { count } = await DatabaseClient.users.deleteMany();
+
+        resolve(count);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
   public createUser(options: RegisterBody) {
     return new Promise<Users>(async (resolve, reject) => {
       try {
@@ -68,11 +80,30 @@ class UserService {
   public getAll(count?: boolean) {
     return new Promise<Users[] | number>(async (resolve, reject) => {
       try {
-        if (count) return resolve(await DatabaseClient.users.count());
+        if (count) {
+          const registredAmount = await DatabaseClient.users.count();
+          return resolve(registredAmount);
+        }
 
         const users = await DatabaseClient.users.findMany();
 
         resolve(users);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  public isAvailable() {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        const registredAmount = await this.getAll(true);
+
+        if (registredAmount >= 500) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
       } catch (err) {
         reject(err);
       }

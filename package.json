@@ -9,6 +9,7 @@
     "start:prod": "set NODE_ENV=prod && node -r ./tsconfig-paths-bootstrap.js build/index.js",
     "prisma:f": "npx prisma format",
     "prisma:m": "npx prisma migrate",
+    "prisma:p": "npx prisma db push",
     "build": "tsc"
   },
   "repository": {
